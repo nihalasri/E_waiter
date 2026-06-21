@@ -9,7 +9,7 @@ const BillPage = ({ cart, customerInfo, onNavigate, orderId }) => {
     const [isProcessing, setIsProcessing] = useState(false);
 
     const handleUpiPayment = (appType) => {
-        const upiString = `pa=restaurant@upi&pn=DineZen&am=${total}&cu=INR`;
+        const upiString = `pa=restaurant@upi&pn=E_Waiter&am=${total}&cu=INR`;
         
         // Attempt to trigger the native app intents or fallback to web
         if (appType === 'gpay') {
@@ -112,7 +112,7 @@ const BillPage = ({ cart, customerInfo, onNavigate, orderId }) => {
                             style={{ display: 'block', width: '200px', height: '200px', borderRadius: '10px' }}
                             onError={(e) => {
                                 e.target.onerror = null;
-                                e.target.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=restaurant@upi&pn=DineZen&am=${total}&cu=INR`;
+                                e.target.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=restaurant@upi&pn=E_Waiter&am=${total}&cu=INR`;
                             }}
                         />
                     </div>

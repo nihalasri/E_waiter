@@ -14,7 +14,7 @@ const Navigation = ({ activePage, onNavigate }) => {
       <header className="mobile-top-header">
         <div className="logo-container" onClick={() => onNavigate('home')}>
           <ion-icon name="restaurant-outline" style={{ fontSize: '1.8rem', color: 'var(--primary)' }}></ion-icon>
-          <span className="website-name">DineZen</span>
+          <span className="website-name">E_Waiter</span>
         </div>
         <div 
           className={`admin-icon-btn ${activePage === 'admin' ? 'active' : ''}`} 
@@ -30,7 +30,7 @@ const Navigation = ({ activePage, onNavigate }) => {
         {/* Desktop Sidebar Top Logo */}
         <div className="sidebar-logo-container" onClick={() => onNavigate('home')}>
           <ion-icon name="restaurant-outline" className="sidebar-logo-icon"></ion-icon>
-          <span className="sidebar-website-name">DineZen</span>
+          <span className="sidebar-website-name">E_Waiter</span>
         </div>
 
         {/* Sidebar Middle Nav Links (which becomes Bottom Nav Links on Mobile) */}

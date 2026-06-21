@@ -58,7 +58,7 @@ const App = () => {
                     <div className="page landing-page">
                         <div className="landing-header">
                             <span className="welcome-tagline">CULINARY EXCELLENCE</span>
-                            <h1>Welcome to DineZen</h1>
+                            <h1>Welcome to E_Waiter</h1>
                             <p>Select a catalog below to begin your culinary journey</p>
                         </div>
                         <div className="bento-grid">
