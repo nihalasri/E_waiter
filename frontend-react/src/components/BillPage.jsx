@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import BottomNav from './BottomNav';
 
 const BillPage = ({ cart, customerInfo, onNavigate, orderId }) => {
     const total = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
@@ -82,7 +81,6 @@ const BillPage = ({ cart, customerInfo, onNavigate, orderId }) => {
                 Start Ordering
               </button>
             </div>
-            <BottomNav active="bill" onNavigate={onNavigate} />
           </div>
         );
     }
@@ -214,7 +212,6 @@ const BillPage = ({ cart, customerInfo, onNavigate, orderId }) => {
                     </div>
                 )}
             </div>
-            <BottomNav active="bill" onNavigate={onNavigate} />
         </div>
     );
 };

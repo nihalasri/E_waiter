@@ -35,7 +35,8 @@ def setup_database():
                 sub_category VARCHAR(100),
                 price DECIMAL(10, 2) NOT NULL,
                 image_url VARCHAR(500),
-                description TEXT
+                description TEXT,
+                is_available TINYINT(1) DEFAULT 1
             )
         """)
         

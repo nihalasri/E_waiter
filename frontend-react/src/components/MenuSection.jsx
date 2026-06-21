@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import BottomNav from './BottomNav';
 
 // Sea Food Starter Images
 import crabMeatOmlette from '../assets/dishes/crab_meat_omlette.png';
@@ -458,8 +457,6 @@ const MenuSection = ({ cart, setCart, addToCart, removeFromCart, cartCount, onNa
           )}
         </div>
       </div>
-
-      <BottomNav active="menu" onNavigate={onNavigate} />
 
       {cartCount > 0 && (
         <div className="cart-pop">

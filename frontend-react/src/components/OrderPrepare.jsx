@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import BottomNav from "./BottomNav";
 
 const OrderPrepare = ({ orderId, onNavigate }) => {
   const [timeLeft, setTimeLeft] = useState(60);
-  const [isCancelled, setIsCancelled] = useState(false);
-  const [isConfirmed, setIsConfirmed] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
+  const [status, setStatus] = useState("Preparing");
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -15,13 +12,7 @@ const OrderPrepare = ({ orderId, onNavigate }) => {
         const data = await response.json();
         if (response.ok) {
           setTimeLeft(data.remaining_cancel_time);
-          if (data.status === "Cancelled") {
-            setIsCancelled(true);
-          } else if (data.status === "Confirmed") {
-            setIsConfirmed(true);
-          } else if (data.status === "Completed") {
-            setIsCompleted(true);
-          }
+          setStatus(data.status);
         }
       } catch (err) {
         console.error("Error fetching order status:", err);
@@ -35,11 +26,11 @@ const OrderPrepare = ({ orderId, onNavigate }) => {
   }, [orderId]);
 
   useEffect(() => {
-    if (timeLeft > 0 && !isCancelled) {
+    if (timeLeft > 0 && status !== "Cancelled") {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
       return () => clearTimeout(timer);
     }
-  }, [timeLeft, isCancelled]);
+  }, [timeLeft, status]);
 
   const handleCancel = async () => {
     try {
@@ -51,7 +42,7 @@ const OrderPrepare = ({ orderId, onNavigate }) => {
       const data = await response.json();
 
       if (response.ok) {
-        setIsCancelled(true);
+        setStatus("Cancelled");
         setMessage("Order cancelled successfully.");
       } else {
         setMessage(data.error || "Failed to cancel order.");
@@ -84,22 +75,21 @@ const OrderPrepare = ({ orderId, onNavigate }) => {
               cursor: "pointer",
               fontSize: "1.1rem",
               fontWeight: "600",
-              boxShadow: "0 4px 15px rgba(59, 130, 246, 0.4)",
+              boxShadow: "0 4px 15px rgba(205, 162, 80, 0.4)",
               transition: "transform 0.2s, box-shadow 0.2s"
             }}
             onMouseOver={(e) => {
               e.target.style.transform = "translateY(-2px)";
-              e.target.style.boxShadow = "0 6px 20px rgba(59, 130, 246, 0.6)";
+              e.target.style.boxShadow = "0 6px 20px rgba(205, 162, 80, 0.6)";
             }}
             onMouseOut={(e) => {
               e.target.style.transform = "translateY(0)";
-              e.target.style.boxShadow = "0 4px 15px rgba(59, 130, 246, 0.4)";
+              e.target.style.boxShadow = "0 4px 15px rgba(205, 162, 80, 0.4)";
             }}
           >
             Start Ordering
           </button>
         </div>
-        <BottomNav active="orders" onNavigate={onNavigate} />
       </div>
     );
   }
@@ -108,18 +98,18 @@ const OrderPrepare = ({ orderId, onNavigate }) => {
     <div className="home-container">
       <div className="glass" style={{ padding: "40px", textAlign: "center" }}>
         <ion-icon
-          name={isCancelled ? "close-circle-outline" : isCompleted ? "restaurant-outline" : isConfirmed ? "checkmark-circle-outline" : "time-outline"}
+          name={status === "Cancelled" ? "close-circle-outline" : status === "Completed" ? "restaurant-outline" : status === "Confirmed" ? "checkmark-circle-outline" : "time-outline"}
           style={{
             fontSize: "4rem",
-            color: isCancelled ? "var(--accent)" : isCompleted ? "#fbbf24" : isConfirmed ? "#10b981" : "var(--primary)",
+            color: status === "Cancelled" ? "var(--accent)" : status === "Completed" ? "#fbbf24" : status === "Confirmed" ? "#10b981" : "var(--primary)",
           }}
         ></ion-icon>
-        <h2 style={{ margin: "20px 0", color: isCompleted ? '#fbbf24' : isConfirmed && !isCancelled ? '#10b981' : 'inherit' }}>
-          {isCancelled ? "Order Cancelled" : isCompleted ? "Order Preparation Done!" : isConfirmed ? "Order Confirmed!" : "Order Preparing..."}
+        <h2 style={{ margin: "20px 0", color: status === "Completed" ? '#fbbf24' : status === "Confirmed" ? '#10b981' : 'inherit' }}>
+          {status === "Cancelled" ? "Order Cancelled" : status === "Completed" ? "Order Preparation Done!" : status === "Confirmed" ? "Order Confirmed!" : "Order Preparing..."}
         </h2>
         <p>Order ID: #{orderId}</p>
 
-        {!isCancelled && !isCompleted && (
+        {status !== "Cancelled" && status !== "Completed" && (
           <>
             <p style={{ color: "#94a3b8", margin: "10px 0" }}>
               Estimated Time: 15-20 Minutes
@@ -177,44 +167,44 @@ const OrderPrepare = ({ orderId, onNavigate }) => {
           </>
         )}
 
-        {isCompleted && (
+        {status === "Completed" && (
           <div style={{ marginTop: "20px" }}>
             <p style={{ fontSize: "1.1rem", color: "#e2e8f0", marginBottom: "30px", fontWeight: "300" }}>
                Ready to serve! We hope you enjoy your meal. Happy Dining! ✨
             </p>
             <div style={{ display: "flex", gap: "15px", justifyContent: "center", flexWrap: "wrap" }}>
                 <button 
-                    onClick={() => onNavigate('menu')}
-                    style={{
-                        padding: "12px 24px",
-                        background: "rgba(255,255,255,0.1)",
-                        border: "1px solid rgba(255,255,255,0.2)",
-                        color: "white",
-                        borderRadius: "12px",
-                        cursor: "pointer",
-                        fontWeight: "600",
-                        transition: "0.3s"
-                    }}
-                    onMouseOver={e => e.currentTarget.style.background = "rgba(255,255,255,0.2)"}
-                    onMouseOut={e => e.currentTarget.style.background = "rgba(255,255,255,0.1)"}
+                  onClick={() => onNavigate('menu')}
+                  style={{
+                      padding: "12px 24px",
+                      background: "rgba(255,255,255,0.1)",
+                      border: "1px solid rgba(255,255,255,0.2)",
+                      color: "white",
+                      borderRadius: "12px",
+                      cursor: "pointer",
+                      fontWeight: "600",
+                      transition: "0.3s"
+                  }}
+                  onMouseOver={e => e.currentTarget.style.background = "rgba(255,255,255,0.2)"}
+                  onMouseOut={e => e.currentTarget.style.background = "rgba(255,255,255,0.1)"}
                 >
                     Your Next Order
                 </button>
                 <button 
-                    onClick={() => onNavigate('bill')}
-                    style={{
-                        padding: "12px 24px",
-                        background: "var(--primary)",
-                        border: "none",
-                        color: "white",
-                        borderRadius: "12px",
-                        cursor: "pointer",
-                        fontWeight: "600",
-                        transition: "0.3s",
-                        boxShadow: "0 4px 15px rgba(59, 130, 246, 0.4)"
-                    }}
-                    onMouseOver={e => e.currentTarget.style.transform = "translateY(-2px)"}
-                    onMouseOut={e => e.currentTarget.style.transform = "translateY(0)"}
+                  onClick={() => onNavigate('bill')}
+                  style={{
+                      padding: "12px 24px",
+                      background: "var(--primary)",
+                      border: "none",
+                      color: "white",
+                      borderRadius: "12px",
+                      cursor: "pointer",
+                      fontWeight: "600",
+                      transition: "0.3s",
+                      boxShadow: "0 4px 15px rgba(205, 162, 80, 0.4)"
+                  }}
+                  onMouseOver={e => e.currentTarget.style.transform = "translateY(-2px)"}
+                  onMouseOut={e => e.currentTarget.style.transform = "translateY(0)"}
                 >
                     Pay Bill
                 </button>
@@ -226,14 +216,14 @@ const OrderPrepare = ({ orderId, onNavigate }) => {
           <p
             style={{
               marginTop: "20px",
-              color: isCancelled ? "#10b981" : "var(--accent)",
+              color: status === "Cancelled" ? "var(--accent)" : "#10b981",
             }}
           >
             {message}
           </p>
         )}
 
-        {isCancelled && (
+        {status === "Cancelled" && (
             <button 
                 onClick={() => onNavigate('menu')}
                 style={{
@@ -257,7 +247,6 @@ const OrderPrepare = ({ orderId, onNavigate }) => {
                     100% { width: 100%; transform: translateX(100%); }
                 }
             `}</style>
-      <BottomNav active="orders" onNavigate={onNavigate} />
     </div>
   );
 };

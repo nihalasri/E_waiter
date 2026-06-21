@@ -46,7 +46,9 @@ const AdminPanel = ({ onNavigate }) => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        if (username.trim() === 'mohamedmufeez234' && password === 'Mufeez@234') {
+        const expectedUser = import.meta.env.VITE_ADMIN_USERNAME || 'Nihal';
+        const expectedPass = import.meta.env.VITE_ADMIN_PASSWORD || 'Nihal';
+        if (username.trim() === expectedUser && password === expectedPass) {
             setIsAuthenticated(true);
             setLoginError('');
         } else {
