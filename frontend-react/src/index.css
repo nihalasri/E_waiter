@@ -55,9 +55,9 @@ body {
   }
   
   .app-shell.has-sidebar .main-content {
-    margin-left: 260px;
-    width: calc(100% - 260px);
-    padding: 40px 60px;
+    margin-left: 220px;
+    width: calc(100% - 220px);
+    padding: 30px 40px;
   }
 }
 
@@ -131,12 +131,12 @@ body {
   .navigation-aside {
     display: flex;
     flex-direction: column;
-    width: 260px;
+    width: 220px;
     height: 100vh;
     position: fixed;
     left: 0;
     top: 0;
-    padding: 40px 24px;
+    padding: 25px 16px;
     justify-content: space-between;
     border-radius: 0 32px 32px 0;
     border-left: none;
@@ -149,21 +149,21 @@ body {
   .sidebar-logo-container {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     cursor: pointer;
-    padding-bottom: 30px;
+    padding-bottom: 15px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   .sidebar-logo-icon {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     color: var(--primary);
     filter: drop-shadow(0 0 10px rgba(205, 162, 80, 0.4));
   }
 
   .sidebar-website-name {
-    font-size: 1.6rem;
+    font-size: 1.35rem;
     font-weight: 900;
     letter-spacing: -0.5px;
     background: linear-gradient(45deg, var(--primary), var(--accent));
@@ -175,26 +175,26 @@ body {
   .nav-links-container {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
     flex-grow: 1;
   }
 
   .nav-item-link {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 14px 20px;
-    border-radius: 16px;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
     color: var(--text-dim);
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.95rem;
     border: 1px solid transparent;
   }
 
   .nav-item-link ion-icon {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     transition: transform 0.3s ease;
   }
 
@@ -218,21 +218,21 @@ body {
 
   .sidebar-footer {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding-top: 20px;
-    margin-top: 20px;
+    padding-top: 15px;
+    margin-top: 15px;
   }
 
   .sidebar-admin-link {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 14px 20px;
-    border-radius: 16px;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
     color: var(--text-dim);
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.95rem;
     border: 1px solid transparent;
   }
 
@@ -433,49 +433,49 @@ body {
 .landing-header {
   width: 100%;
   text-align: center;
-  padding: 40px 20px 20px;
+  padding: 20px 20px 10px;
   max-width: 800px;
-  margin: 0 auto 20px;
+  margin: 0 auto 10px;
 }
 
 .welcome-tagline {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 800;
-  letter-spacing: 2.5px;
+  letter-spacing: 2px;
   color: var(--primary);
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   display: block;
 }
 
 .landing-header h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   font-weight: 900;
   color: white;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   line-height: 1.2;
 }
 
 .landing-header p {
-  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  font-size: clamp(0.85rem, 1.8vw, 1rem);
   color: var(--text-dim);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* Bento Grid Overhaul */
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 200px;
-  gap: 24px;
-  padding: 20px;
-  max-width: 1200px;
+  grid-auto-rows: 140px;
+  gap: 16px;
+  padding: 15px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
 .bento-item {
-  border-radius: 28px;
-  padding: 30px;
+  border-radius: 20px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -530,9 +530,9 @@ body {
 .bento-item h3 {
   position: relative;
   z-index: 2;
-  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-size: clamp(1.1rem, 2vw, 1.40rem);
   font-weight: 800;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   color: white;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   letter-spacing: -0.5px;
@@ -541,7 +541,7 @@ body {
 .bento-item p {
   position: relative;
   z-index: 2;
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   color: var(--text-dim);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
